@@ -1,6 +1,6 @@
 AC_INIT([gradix], [0.1], [gergely@polonkai.eu])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([-Wall -Wno-portability -Werror foreign])
 AM_SILENT_RULES([yes])
 AC_ARG_ENABLE(debug, [AC_HELP_STRING([--enable-debug], [compile with debugging support. Be warned that debugging support can eat a large amount of CPU when many clients are connected. Also, debug logs can become very large!])], , enable_debug=no)
 
@@ -35,15 +35,23 @@ AC_CHECK_LIB([m], [log10])
 AC_CHECK_LIB([m], [sqrt])
 AC_CHECK_LIB([m], [floor])
 PKG_PROG_PKG_CONFIG
+PKG_CHECK_MODULES([GLIB], [glib-2.0])
+PKG_CHECK_MODULES([GOBJECT], [gobject-2.0])
 PKG_CHECK_MODULES([GTK], [gtk+-3.0])
 AC_CONFIG_MACRO_DIR([m4])
 
+GLIB_MKENUMS="$($PKG_CONFIG --variable=glib_mkenums glib-2.0)"
+AC_SUBST([GLIB_MKENUMS])
+
 LIBSWE_LIBS='$(top_builddir)/swe/src/libswe-1.75.la'
 AC_SUBST(LIBSWE_LIBS)
+LIBSWE_GLIB_LIBS='$(top_builddir)/glib-swe/src/libswe-glib-0.1.la'
+AC_SUBST(LIBSWE_GLIB_LIBS)
 
 AC_CONFIG_FILES([
 	Makefile
 	swe/src/Makefile
+	swe-glib/src/Makefile
 	src/Makefile
 	po/Makefile.in
 ])

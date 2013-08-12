@@ -1,0 +1,24 @@
+AM_CPPFLAGS = -DG_LOG_DOMAIN=\"Glib-SWE\"
+
+lib_LTLIBRARIES = libglib-swe-0.1.la
+
+libglib_swe_0_1_la_SOURCES = enumtypes.h enumtypes.c glib-sweph.c
+libglib_swe_0_1_la_CFLAGS = $(GLIB_CFLAGS) -Wall
+libglib_swe_0_1_la_LIBADD = $(GLIB_LIBS)
+
+BUILT_SOURCES = enumtypes.h enumtypes.c
+
+gswe_headers = glib-swe.h
+
+CLEANFILES = $(BUILT_SOURCES)
+
+EXTRA_DIST = enumtypes.h.template enumtypes.c.template
+
+enumtypes.h: $(gswe_headers) enumtypes.h.template
+	$(GLIB_MKENUMS) --template $(filter %.template,$^) $(filter-out %.template,$^) > \
+	enumtypes.h.tmp && mv enumtypes.h.tmp enumtypes.h
+
+enumtypes.c: $(gswe_headers) enumtypes.h enumtypes.c.template
+	$(GLIB_MKENUMS) --template $(filter %.template,$^) $(filter-out %.template,$^) > \
+	enumtypes.c.tmp && mv enumtypes.c.tmp enumtypes.c
+

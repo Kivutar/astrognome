@@ -1,3 +1,4 @@
+#if 0
 /* 
   $Header: /users/dieter/sweph/RCS/swetest.c,v 1.78 2010/06/25 07:22:10 dieter Exp $
   swetest.c	A test program
@@ -597,6 +598,7 @@ int main(int argc, char *argv[])
   int32 sid_mode = SE_SIDM_FAGAN_BRADLEY;
   double t2, tstep = 1, thour = 0;
   double delt;
+
   datm[0] = 0; datm[1] = 0; datm[2] = 0; datm[3] = 0;
   dobs[0] = 0; dobs[1] = 0;
   dobs[2] = 0; dobs[3] = 0; dobs[4] = 0; dobs[5] = 0;
@@ -2679,3 +2681,10 @@ static int cut_str_any(char *s, char *cutlist, char *cpos[], int nmax)
 }	/* cutstr */
 #endif
 
+#else
+int
+main(int argc, char *argv[])
+{
+	return 0;
+}
+#endif
