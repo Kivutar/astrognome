@@ -84,7 +84,6 @@ const char *signName[] = {
                                                        *(p) += (val); \
                                                        g_hash_table_replace((dtt), GINT_TO_POINTER((vsd)->type), (p));
 
-/*
 GtkBuilder *builder;
 
 void
@@ -135,7 +134,6 @@ main(int argc, char *argv[])
 
 	return 0;
 }
-*/
 
 /*
 RsvgHandle *svgHandle[SE_CHIRON + SIGN_PISCES + 1];
@@ -189,7 +187,6 @@ init_graphics(void)
 
     return TRUE;
 }
-*/
 
 int
 main(int argc, char *argv[])
@@ -370,7 +367,6 @@ main(int argc, char *argv[])
     return OK;
 }
 
-/*
 static gboolean
 draw_clock (ClutterCanvas *canvas, cairo_t *cr, int width, int height)
 {
